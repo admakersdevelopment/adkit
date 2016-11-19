@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Html::img('images/logo.png', [],['alt' => 'alt image']),
+        'brandLabel' => Html::img('images/logo-cropped.png', [],['alt' => 'alt image']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -37,6 +37,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Admin', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Browse', 'url' => ['/site/contact'], 'visible' => !Yii::$app->user->isGuest],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -64,7 +66,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Admakers International <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <a href="http://www.admakers.com/" target="_blank" class="color-blue">Admakers International</a> <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

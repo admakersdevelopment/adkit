@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\UserTypes;
 
 /**
  * This is the model class for table "users".
@@ -44,11 +45,17 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_type_id' => 'User Type ID',
+            'user_type_id' => 'User Type',
             'name' => 'Name',
             'surname' => 'Surname',
             'email' => 'Email',
             'password' => 'Password',
         ];
     }
+
+    public function getUserType()
+    {
+        return $this->hasOne(UserTypes::className(), ['id' => 'user_type_id']);
+    }
+
 }
