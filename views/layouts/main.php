@@ -38,7 +38,16 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Admin', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
-            ['label' => 'Browse', 'url' => ['/site/contact'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Browse', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
+            [
+            'label' => 'Spec Sheets',
+            'items' => [
+                 ['label' => 'Chevrolet', 'url' => '#'],
+                 ['label' => 'Opel', 'url' => '#'],
+                 ['label' => 'Isuzu', 'url' => '#'],
+            ],
+            ],
+            ['label' => 'iCare', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
