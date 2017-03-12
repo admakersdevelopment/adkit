@@ -11,9 +11,9 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * SpecsheetsController implements the CRUD actions for Specsheets model.
+ * iCareController implements the CRUD actions for Specsheets model.
  */
-class SpecsheetsController extends Controller
+class iCareController extends Controller
 {
     /**
      * @inheritdoc
@@ -40,45 +40,6 @@ class SpecsheetsController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionViewChevrolet()
-    {
-        $searchModel = new SpecsheetsSearch();
-        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-        $queryParams["SpecsheetsSearch"]["category_ref"] = 1;
-        $dataProvider = $searchModel->search($queryParams);
-
-        return $this->render('view-chevrolet', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionViewOpel()
-    {
-        $searchModel = new SpecsheetsSearch();
-        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-        $queryParams["SpecsheetsSearch"]["category_ref"] = 2;
-        $dataProvider = $searchModel->search($queryParams);
-
-        return $this->render('view-opel', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionViewIsuzu()
-    {
-        $searchModel = new SpecsheetsSearch();
-        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-        $queryParams["SpecsheetsSearch"]["category_ref"] = 3;
-        $dataProvider = $searchModel->search($queryParams);
-
-        return $this->render('view-isuzu', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

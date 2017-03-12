@@ -4,7 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Users;
+use app\models\UserGroups;
+use app\models\LinkUserGroups;
 use app\models\UsersSearch;
+use app\models\UserGroupsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,10 +41,49 @@ class UsersController extends Controller
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $searchModelUserGroups = new UserGroupsSearch();
+        $dataProviderUserGroups = $searchModelUserGroups->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelUserGroups' => $searchModelUserGroups,
+            'dataProviderUserGroups' => $dataProviderUserGroups,
         ]);
+    }
+
+    public function actionAddNewGroup() {
+        $model = new UserGroups();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }elseif (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_user_groups_form', [
+                'model' => $model
+            ]);
+        } else {
+            return $this->render('_form', [
+                'model' => $model
+            ]);
+        }
+    }
+
+    public function actionLinkGroup($id) {
+        $model = new LinkUserGroups();
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->user_id = $id;
+            if($model->validate() && $model->save()){
+                return $this->redirect(['view', 'id' => $id]);    
+            }var_dump($model); die();
+        }elseif (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_link_user_groups_form', [
+                'model' => $model
+            ]);
+        } else {
+            return $this->render('_form', [
+                'model' => $model
+            ]);
+        }
     }
 
     /**
@@ -65,8 +107,29 @@ class UsersController extends Controller
     {
         $model = new Users();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->password = sha1('admin');
+            if($model->save()){
+                // mail('ally@newby.co.za','subject','message');/
+                Yii::$app->mailer->compose()
+                 ->setFrom('ally@newby.co.za')
+                 ->setTo('ally@newby.co.za')
+                 ->setSubject('Message subject')
+                 ->setHtmlBody('<b>HTML content</b>')
+                ->send();
+                /*if(
+                Yii::$app->mailer->compose()
+                ->setFrom('ally@newby.co.za')
+                ->setTo('ally@newby.co.za')
+                ->setSubject('Message subject')
+                ->setHtmlBody('<b>HTML content</b>')
+                ->send()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }*/
+                var_dump('here'); die();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            
         } else {
             return $this->render('create', [
                 'model' => $model,

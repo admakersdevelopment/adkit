@@ -5,20 +5,19 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "categories".
+ * This is the model class for table "user_groups".
  *
  * @property integer $id
  * @property string $description
- * @property string $thumbnail
  */
-class Categories extends \yii\db\ActiveRecord
+class UserGroups extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'categories';
+        return 'user_groups';
     }
 
     /**
@@ -29,7 +28,6 @@ class Categories extends \yii\db\ActiveRecord
         return [
             [['description'], 'required'],
             [['description'], 'string', 'max' => 255],
-            [['thumbnail'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,7 +39,6 @@ class Categories extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'description' => 'Description',
-            'thumbnail' => 'Thumbnail',
         ];
     }
 }

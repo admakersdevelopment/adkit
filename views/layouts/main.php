@@ -38,16 +38,25 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Admin', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
-            ['label' => 'Browse', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
+            //['label' => 'Browse All', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
             [
+            'visible' => !Yii::$app->user->isGuest,
             'label' => 'Spec Sheets',
             'items' => [
-                 ['label' => 'Chevrolet', 'url' => '#'],
-                 ['label' => 'Opel', 'url' => '#'],
-                 ['label' => 'Isuzu', 'url' => '#'],
+                 ['label' => 'All', 'url' => ['/specsheets/index']],
+                 ['label' => 'Chevrolet', 'url' => ['/specsheets/view-chevrolet']],
+                 ['label' => 'Opel', 'url' => ['/specsheets/view-opel']],
+                 ['label' => 'Isuzu', 'url' => ['/specsheets/view-isuzu']]
             ],
             ],
-            ['label' => 'iCare', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
+            [
+            'visible' => !Yii::$app->user->isGuest,
+            'label' => 'iCare',
+            'items' => [
+                 ['label' => 'All', 'url' => ['/icare/index']],
+                 ['label' => 'Chevrolet', 'url' => ['/specsheets/nominations']],
+            ],
+            ],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

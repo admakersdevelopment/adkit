@@ -14,6 +14,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            // 'id',
+            'date_created',
+            'title',
+            'description',
+            // 'file',
+            [
+                'attribute' => 'file',
+                 'value' => Html::a($model->file, 'uploaded-specsheets/' . $model->file, ['target' => '_blank']),
+                 'format' => 'raw'
+            ],
+            [
+                'attribute' => 'category_ref',
+                'value' => $model->category->description
+            ],
+            [
+                'attribute' => 'status_ref',
+                'value' => $model->status->description
+            ],
+            // 'thumbnail',
+        ],
+    ]) ?>
+    <br>
+    <img src="uploaded-specsheets/<?php echo $model->thumbnail;?>">
+    <br>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -23,20 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'date_created',
-            'title',
-            'description',
-            'file',
-            'category_ref',
-            'status_ref',
-            'thumbnail',
-        ],
-    ]) ?>
+    </p>    
 
 </div>

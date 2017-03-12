@@ -36,7 +36,7 @@ $this->title = 'Admakers Adkit';
         <div class="row">
             <div class="col-md-12">
                 <h4>Disclaimer</h4>
-                <p>Please note that the ad templates shown on Adkit are of low resolution/ quality and are to be used for reference purposes only. All changes must be requested via AdMakers. AdMakers will create the artwork for you and supply it to publications.</p>
+                <p>Please note that the ad templates shown on Adkit are of low resolution/quality and are to be used for reference purposes only. All changes must be requested via AdMakers. AdMakers will create the artwork for you and supply it to publications.</p>
             </div>
         </div>
     </div>

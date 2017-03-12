@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
@@ -23,19 +25,30 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'name',
             'surname',
-            'email:email',
+            'username:email',
             // 'password',
         ],
     ]) ?>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php /* Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) */?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::button('<i class="fa fa-edit"></i> Link Group', 
+                ['value' => Url::to(['users/link-group', 'id' => $model->id]), 
+                 'title' => 'Add New Group', 
+                 'class' => 'showModalButton btn btn-primary btn-flat']); ?>
     </p>
 </div>
+
+<?php
+Modal::begin([
+    'options' => [
+        'tabindex' => false
+    ],    
+    'header' => 'User Groups',
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+
+Modal::end();
+?>

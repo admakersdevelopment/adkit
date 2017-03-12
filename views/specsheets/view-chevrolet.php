@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SpecsheetsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'All Specsheets';
+$this->title = 'Chevrolet Specsheets';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="specsheets-index">
