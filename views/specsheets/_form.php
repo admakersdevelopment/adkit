@@ -28,12 +28,13 @@ use app\models\Statuses;
     <?php $statuses_data = ArrayHelper::map(Statuses::find()->all(), 'id', 'description')?>
     <?= $form->field($model, 'status_ref')->dropDownList($statuses_data , ['prompt'=>'Select a Status']) ?>
     
+    <?php if($model->isNewRecord){ ?>
     <?= $form->field($model, 'file')->fileInput() ?>
     
     <?= $form->field($model, 'thumbnail')->fileInput() ?>
-
+    <?php } ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary btn-flat']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

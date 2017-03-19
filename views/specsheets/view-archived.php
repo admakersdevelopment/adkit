@@ -2,15 +2,12 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\ArrayHelper;
-use app\models\Statuses;
-use app\models\Categories;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SpecsheetsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'All Specsheets';
+$this->title = 'Archived Specsheets';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="specsheets-index">
@@ -21,7 +18,7 @@ $this->title = 'All Specsheets';
     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'summary' => '',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -29,22 +26,16 @@ $this->title = 'All Specsheets';
             'title',
             //'description',
             [
-                'attribute' => 'specsheet_category',
+                'attribute' => 'category_ref',
                 'value' => 'category.description',
-                'filter' => ArrayHelper::map(Categories::find()->all(), 'description', 'description'),
             ],
             [
-                'attribute' => 'specsheet_status',
+                'attribute' => 'status_ref',
                 'value' => 'status.description',
-                'filter' => ArrayHelper::map(Statuses::find()->all(), 'description', 'description'),
             ],
             // 'thumbnail',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-    <p>
-        <?= Html::a('Upload new Specsheet', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
-    </p>
 </div>

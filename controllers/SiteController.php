@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\ForgotPasswordForm;
+use app\models\Users;
 
 class SiteController extends Controller
 {
@@ -79,6 +81,53 @@ class SiteController extends Controller
             return $this->goBack();
         }
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Forgot Password action.
+     *
+     * @return string
+     */
+    public function actionForgotPassword()
+    {
+
+        $model = new ForgotPasswordForm();
+        if ($model->load(Yii::$app->request->post())) {
+
+            //if username exists send new password else send error message
+            if($model->validateUsername()){
+                $userModel = Users::find()
+                ->where(['username' => $model->username])
+                ->one();
+
+                $password =  Yii::$app->getSecurity()->generateRandomString ( $length = 15 );
+                $encryptPassword = sha1($password);
+                $userModel->password = $encryptPassword;
+                $userModel->save();
+
+
+                $html = "
+                <p>Dear ".$userModel->name." ".$userModel->surname."</p>
+                <p>These are your new login details: <br>Username: ".$userModel->username."<br>Password: ".$password."</p>
+                <p>Kind Regards<br>The Adkit Team</p>
+                ";    
+                $sent =  Yii::$app->mailer->compose()
+                ->setFrom('from@domain.com')
+                ->setTo('ally@newby.co.za')
+                ->setSubject('Forgot Password')
+                ->setHtmlBody($html)
+                ->send();
+                \Yii::$app->getSession()->setFlash('success', 'An email has been sent with your new login details.');
+                return $this->redirect(['index']);
+                
+            }else{
+                \Yii::$app->getSession()->setFlash('danger', 'Username does not exist.');
+            }
+            
+        }
+        return $this->render('forgot', [
             'model' => $model,
         ]);
     }

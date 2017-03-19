@@ -7,13 +7,20 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Request New Password';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+echo '<div class="alert alert-' . $key . '">' . $message . '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></div>';
+}
+?>
+
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <p>Please provide your email and we will send you a new password:</p>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -25,12 +32,9 @@ $this->title = 'Login';
     ]); ?>
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Submit', ['class' => 'btn btn-primary btn-flat', 'name' => 'login-button']) ?>
             </div>
         </div>
 

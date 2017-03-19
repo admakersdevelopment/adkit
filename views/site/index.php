@@ -4,6 +4,11 @@
 
 $this->title = 'Admakers Adkit';
 ?>
+<?php
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+echo '<div class="alert alert-' . $key . '">' . $message . '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></div>';
+}
+?>
 <div class="site-index">
 
     <div class="body-content">

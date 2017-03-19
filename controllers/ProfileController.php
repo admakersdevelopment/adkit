@@ -74,7 +74,7 @@ class UsersController extends Controller
             $model->user_id = $id;
             if($model->validate() && $model->save()){
                 return $this->redirect(['view', 'id' => $id]);    
-            }var_dump($model); die();
+            }
         }elseif (Yii::$app->request->isAjax) {
             return $this->renderAjax('_link_user_groups_form', [
                 'model' => $model

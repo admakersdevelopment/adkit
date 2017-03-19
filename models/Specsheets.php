@@ -21,6 +21,9 @@ use app\models\Statuses;
  */
 class Specsheets extends \yii\db\ActiveRecord
 {
+    public $specsheet_status;
+    public $specsheet_category;
+
     /**
      * @inheritdoc
      */

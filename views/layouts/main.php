@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -36,7 +37,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Home', 'url' => ['/site/index', ], 'visible' => Yii::$app->user->isGuest,],
+            ['label' => 'Profile', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => 'Admin', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
             //['label' => 'Browse All', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
             [
@@ -46,15 +48,17 @@ AppAsset::register($this);
                  ['label' => 'All', 'url' => ['/specsheets/index']],
                  ['label' => 'Chevrolet', 'url' => ['/specsheets/view-chevrolet']],
                  ['label' => 'Opel', 'url' => ['/specsheets/view-opel']],
-                 ['label' => 'Isuzu', 'url' => ['/specsheets/view-isuzu']]
+                 ['label' => 'Isuzu', 'url' => ['/specsheets/view-isuzu']],
+                 ['label' => 'Archived', 'url' => ['/specsheets/view-archived']]
             ],
             ],
             [
             'visible' => !Yii::$app->user->isGuest,
             'label' => 'iCare',
             'items' => [
-                 ['label' => 'All', 'url' => ['/icare/index']],
-                 ['label' => 'Chevrolet', 'url' => ['/specsheets/nominations']],
+                 ['label' => 'General', 'url' => ['/icare/index']],
+                 ['label' => 'New Nomination', 'url' => ['/icare/create']],
+                 ['label' => 'Vote', 'url' => ['/icare/nominations']],
             ],
             ],
             Yii::$app->user->isGuest ? (
@@ -63,12 +67,13 @@ AppAsset::register($this);
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Logout', //(' . Yii::$app->user->identity->username . ')
                     ['class' => 'btn btn-link']
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+             ['label' => 'Forgot Password', 'url' => ['/site/forgot-password', ], 'visible' => Yii::$app->user->isGuest,],
         ],
     ]);
     NavBar::end();
@@ -86,7 +91,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; <a href="http://www.admakers.com/" target="_blank" class="color-blue">Admakers International</a> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        
     </div>
 </footer>
 

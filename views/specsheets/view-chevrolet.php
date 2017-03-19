@@ -18,7 +18,7 @@ $this->title = 'Chevrolet Specsheets';
     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'summary' => '',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -40,6 +40,6 @@ $this->title = 'Chevrolet Specsheets';
     ]); ?>
 
     <p>
-        <?= Html::a('Upload new Specsheet', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Upload new Specsheet', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
     </p>
 </div>

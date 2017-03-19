@@ -37,7 +37,9 @@ class SpecsheetsController extends Controller
     public function actionIndex()
     {
         $searchModel = new SpecsheetsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+        $queryParams["SpecsheetsSearch"]["is_not_archived"] = 1;
+        $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -79,6 +81,19 @@ class SpecsheetsController extends Controller
         $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('view-isuzu', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionViewArchived()
+    {
+        $searchModel = new SpecsheetsSearch();
+        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+        $queryParams["SpecsheetsSearch"]["status_ref"] = 3;
+        $dataProvider = $searchModel->search($queryParams);
+
+        return $this->render('view-archived', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
