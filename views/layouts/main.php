@@ -26,7 +26,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
+    <?php //var_dump(Yii::$app->user->identity); die();
     NavBar::begin([
         'brandLabel' => Html::img('images/logo-cropped.png', [],['alt' => 'alt image']),
         'brandUrl' => Yii::$app->homeUrl,
@@ -39,7 +39,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index', ], 'visible' => Yii::$app->user->isGuest,],
             ['label' => 'Profile', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
-            ['label' => 'Admin', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Admin', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->user_type_id == 1],
             //['label' => 'Browse All', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
             [
             'visible' => !Yii::$app->user->isGuest,

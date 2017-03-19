@@ -52,40 +52,6 @@ class UsersController extends Controller
         ]);
     }
 
-    public function actionAddNewGroup() {
-        $model = new UserGroups();
-        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        }elseif (Yii::$app->request->isAjax) {
-            return $this->renderAjax('_user_groups_form', [
-                'model' => $model
-            ]);
-        } else {
-            return $this->render('_form', [
-                'model' => $model
-            ]);
-        }
-    }
-
-    public function actionLinkGroup($id) {
-        $model = new LinkUserGroups();
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->user_id = $id;
-            if($model->validate() && $model->save()){
-                return $this->redirect(['view', 'id' => $id]);    
-            }
-        }elseif (Yii::$app->request->isAjax) {
-            return $this->renderAjax('_link_user_groups_form', [
-                'model' => $model
-            ]);
-        } else {
-            return $this->render('_form', [
-                'model' => $model
-            ]);
-        }
-    }
-
     /**
      * Displays a single Users model.
      * @param integer $id
