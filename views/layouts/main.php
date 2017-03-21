@@ -38,7 +38,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index', ], 'visible' => Yii::$app->user->isGuest,],
-            ['label' => 'Profile', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Profile', 'url' => ['/profile/profile'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => 'Admin', 'url' => ['/users/index'], 'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->user_type_id == 1],
             //['label' => 'Browse All', 'url' => ['/specsheets/index'], 'visible' => !Yii::$app->user->isGuest],
             [

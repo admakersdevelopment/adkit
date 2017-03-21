@@ -17,10 +17,9 @@ echo '<div class="alert alert-' . $key . '">' . $message . '<button aria-hidden=
             <div class="col-md-12">
                 <h2>Welcome to Admakers Adkit</h2>
 
-                <p>This is an online resource for clients falling under the GMSA Dealership network. The library contains current                       advert examples, previous campaigns and new material - as well as a variety of template-based layouts. All of these ads                 can be customised to suit individual client needs. .</p>
+                <p>This is an online resource for clients falling under the GMSA Dealership network. The library contains current advert examples, previous campaigns and new material - as well as a variety of template-based layouts. All of these ads can be customised to suit individual client needs.</p>
             	<p>GM Dealers can login and then access all the content.</p>
-            	<p>Once logged in, begin by clicking "Browse all Collections" in the right side menu.</p>
-            	<p>Online briefing: Click on the tab "Sumbit Online Brief" in the top menu.</p>
+            	<p>Once logged in, begin by clicking "Specsheets" in the main menu.</p>
             </div>
         </div>
         <div class="row">

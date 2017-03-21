@@ -55,7 +55,7 @@ class LoginForm extends Model
      * @return boolean whether the user is logged in successfully
      */
     public function login()
-    {//var_dump($this); die();
+    {
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser());
         }
